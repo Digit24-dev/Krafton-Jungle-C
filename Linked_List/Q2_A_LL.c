@@ -104,6 +104,21 @@ int main()
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
     /* add your code here */
+	ListNode *temp1 = ll1->head;
+	ListNode *temp2 = ll2->head;
+	unsigned int idx1 = 1;
+	
+	// Linked List 1 이 더 작을 때 -> LL1에 하나씩 들어가고 끝.
+	// Linked List 2 가 더 작을 때 -> LL2가 비어져야 함.
+	while (temp1 != NULL)
+	{
+		if (temp2 == NULL) break;
+		insertNode(ll1, idx1, temp2->item);
+		removeNode(ll2, 0);
+		temp2 = ll2->head;
+		idx1 += 2;
+		temp1 = temp1->next->next;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

@@ -104,6 +104,21 @@ int main()
 int isStackPairwiseConsecutive(Stack *s)
 {
   /* add your code here */
+  if (s->ll.size & 0x01) return 0; // size odd
+
+  int item;
+  while (!isEmptyStack(s))
+  {
+	item = pop(s);
+	int toCmp = peek(s) - item;
+	if (toCmp == 1 || toCmp == -1) {
+		pop(s);
+	} else {
+		return 0;
+	}
+  }
+  
+  return 1;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

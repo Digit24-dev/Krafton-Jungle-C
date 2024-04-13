@@ -117,11 +117,54 @@ int main()
 void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 {
 	/* add your code here */
+	if (ll == NULL) return;
+
+	ListNode *p = ll->head;
+	ListNode *qp;
+
+	while (p != NULL)
+	{
+		if (q->ll.head == NULL) {
+			q->ll.head = malloc(sizeof(ListNode));
+			qp = q->ll.head;
+			qp->item = p->item;
+			qp->next = NULL;
+			q->ll.size++;
+		}
+		else {
+			qp->next = malloc(sizeof(ListNode));
+			qp->next->item = p->item;
+			q->ll.size++;
+			qp = qp->next;
+		}
+		p = p->next;
+	}
 }
 
 void removeOddValues(Queue *q)
 {
 	/* add your code here */
+	if (q->ll.head == NULL) return;
+
+	ListNode *p = q->ll.head, *prev = NULL;
+
+	while (p != NULL)
+	{
+		if (p->item % 2 != 0) {
+			if (prev == NULL) {			// first 노드 삭제의 경우
+				q->ll.head = p->next;
+			} else {					// 중간 혹은 마지막 노드일 경우
+				prev->next = p->next;	// prev의 다음을 p의 다음으로 설정해준 후 삭제 진행
+			}
+			ListNode *temp = p;
+			p = p->next;
+			free(temp);
+			q->ll.size--;
+		} else {
+			prev = p;
+			p = p->next;
+		}
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////

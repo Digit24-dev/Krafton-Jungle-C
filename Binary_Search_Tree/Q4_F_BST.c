@@ -89,9 +89,62 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
+void postOrderIterativeS1_(BSTNode *root)
+{
+	/* add your code here */
+	if (root == NULL) return;
+
+	postOrderIterativeS1(root->left);
+	postOrderIterativeS1(root->right);
+	printf("%d ", root->item);
+}
+
+void recursiveStack(Stack *st, BSTNode *node)
+{
+	if (node == NULL) return;
+
+	push(st, node);
+
+	recursiveStack(st, node->left);
+	recursiveStack(st, node->right);
+	printf("%d ", pop(st)->item);
+}
+
 void postOrderIterativeS1(BSTNode *root)
 {
-	 /* add your code here */
+	/* add your code here */
+	if (root == NULL) return;
+
+	Stack *s;
+	s->top = NULL;
+
+	recursiveStack(s, root);
+}
+
+void postOrderIterativeS1_Stacked2(BSTNode *root)
+{
+	if (root == NULL) return;
+
+	Stack *stack;
+	BSTNode *p = root;
+	stack->top = NULL;
+
+	push(stack, root);
+
+	while (!isEmpty(stack))
+	{
+		BSTNode *cur = peek(stack);
+		
+		// 둘다 NULL 일때
+		if (cur->left == NULL && cur->right == NULL)
+			pop(stack);
+
+		
+
+		// 둘다 NOT NULL
+		push(stack, root->left);
+		push(stack, root->right);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

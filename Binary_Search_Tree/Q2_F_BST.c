@@ -88,9 +88,35 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
+void recursiveTraversal(Stack *st, BSTNode *node)
+{
+	if (node == NULL) return;
+
+	push(st, node);
+
+	recursiveTraversal(st, node->left);
+	printf("%d ", pop(st)->item);
+	recursiveTraversal(st, node->right);
+}
+
+void inOrderTraversal_Stacked(BSTNode *root)
+{
+	/* add your code here */
+	if (root == NULL) return;
+
+	Stack *s;
+	s->top = NULL;
+
+	recursiveTraversal(s, root);
+}
+
 void inOrderTraversal(BSTNode *root)
 {
-	 /* add your code here */
+	if (root == NULL) return;
+
+	inOrderTraversal(root->left);
+	printf("%d ", root->item);
+	inOrderTraversal(root->right);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

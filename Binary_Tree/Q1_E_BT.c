@@ -113,10 +113,47 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int identical(BTNode *tree1, BTNode *tree2)
-
+int dfs(BTNode *ptr1, BTNode *ptr2){
+    int ret = 1;
+    static int count = 0;
+    
+    if (ptr1->left != NULL && ptr2->left != NULL)
+        return dfs(ptr1->left, ptr2->left);
+    else if (ptr1->left == NULL && ptr1->left != NULL)
+        return 0;
+    else if (ptr1->left != NULL && ptr1->left == NULL)
+        return 0;
+    
+    if (ptr1->right != NULL && ptr2->right != NULL)
+        return dfs(ptr1->right, ptr2->right);
+    else if (ptr1->right == NULL && ptr1->right != NULL)
+        return 0;
+    else if (ptr1->right == NULL && ptr1->right != NULL)
+        return 0;
+    
+    return ret;
+}
+int identical_mine(BTNode *tree1, BTNode *tree2)
 {
-   /* add your code here */
+    /* add your code here */
+    if (tree1 == NULL && tree2 == NULL) return 1;
+    else if (tree1 != NULL && tree2 == NULL) return 0;
+    else if (tree1 == NULL && tree2 != NULL) return 0;
+
+    BTNode *ptr_1 = tree1, *ptr_2 = tree2;
+
+    // DFS 탐색
+    return dfs(ptr_1, ptr_2);
+}
+
+int identical(BTNode *tree1, BTNode *tree2)
+{
+    /* add your code here */
+    if (!tree1 || !tree2)       // either pointer is NULL? -> 'true' if even one is NULL
+        return tree1 == tree2;  // return compare pointers. (one NULL -> 0 // two NULL -> 1)
+    if (tree1->item != tree2->item)
+        return 0;
+    return identical(tree1->left, tree2->left) && identical(tree1->right, tree2->right);
 }
 
 /////////////////////////////////////////////////////////////////////////////////

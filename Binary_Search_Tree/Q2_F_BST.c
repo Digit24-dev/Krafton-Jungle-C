@@ -110,6 +110,37 @@ void inOrderTraversal_Stacked(BSTNode *root)
 	recursiveTraversal(s, root);
 }
 
+void inOrderTraversal_usingStack(BSTNode *root)
+{
+	BSTNode *p = root;
+	Stack *stack;
+	stack->top = NULL;
+
+	int flag = 0;
+
+	while (!flag)
+	{
+		// if pointer is not null, digging into left
+		if (p != NULL) {
+			push(stack, p);
+			p = p->left;
+		}
+		else {
+			// if pointer is null, it means that the end of the node.
+			if (!isEmpty(stack)) {
+				p = pop(stack);
+				printf("%d ", p->item);
+
+				p = p->right;
+			}
+			else {
+				// if stack is empty => exit
+				flag = 1;
+			}
+		}
+	}
+}
+
 void inOrderTraversal(BSTNode *root)
 {
 	if (root == NULL) return;

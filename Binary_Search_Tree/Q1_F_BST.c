@@ -96,7 +96,6 @@ void levelOrderTraversal(BSTNode* root)
     /* add your code here */
 	Queue q;
 	q.head = NULL; q.tail = NULL;
-	BSTNode *p;
 	
 	enqueue(&q.head, &q.tail, root);
 	

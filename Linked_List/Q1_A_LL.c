@@ -88,7 +88,90 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
+int insertSortedLL_CZ1007(LinkedList *ll, int item)
+{
+	int i =0;
+	ListNode *cur = NULL, *temp;
+
+	if (ll->head == NULL)
+	{
+		ll->head = malloc(sizeof(ListNode));
+		ll->head->next = NULL;
+		ll->head->item = item;
+		ll->size++;
+		return 0;
+	}
+	
+	ListNode *LN = ll->head;
+
+	while (LN != NULL)
+	{
+		if (LN->item == item)
+			return -1;
+		else if (LN->item > item) {
+			temp = malloc(sizeof(ListNode));
+
+			temp->next = LN;
+			temp->item = item;
+
+			if (cur != NULL)
+				cur->next = temp;
+			else
+				ll->head = temp;
+
+			return i;
+		}
+
+		cur = LN;
+		LN = LN->next;
+		++i;
+	}
+}
+
 int insertSortedLL(LinkedList *ll, int item)
+{
+	ListNode *temp = ll->head;
+	ListNode *newNode = malloc(sizeof(ListNode));
+	newNode->item = item;
+	newNode->next = NULL;
+
+	unsigned int idx = 0;
+
+	if (temp == NULL) {
+		ll->head = newNode;
+		ll->size++;
+		return 0;
+	}
+	else {
+		while (temp->item <= item)
+		{
+			++idx;
+			if (temp->item == item) return -1;
+
+			if (temp->next == NULL) {
+				temp->next = newNode;
+				ll->size++;
+				return idx;
+			}
+
+			if (temp->next->item > item) {
+				newNode->next = temp->next;
+				temp->next = newNode;
+				ll->size++;
+				return idx;
+			}
+			temp = temp->next;
+		}
+		if (idx == 0) {
+			newNode->next = ll->head->next;
+			ll->head = newNode;
+			ll->size++;
+			return 0;
+		}
+	}
+}
+
+int insertSortedLL_2(LinkedList *ll, int item)
 {
 	/* add your code here */
 	ListNode *temp = ll->head;

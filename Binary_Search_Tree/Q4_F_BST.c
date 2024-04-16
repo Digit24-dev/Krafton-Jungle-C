@@ -31,7 +31,7 @@ typedef struct _stack
 
 // You should not change the prototypes of these functions
 void postOrderIterativeS1(BSTNode *node);
-
+void inOrderTraversal_usingStack(BSTNode *root);
 void insertBSTNode(BSTNode **node, int value);
 
 // You may use the following functions or you may write your own
@@ -125,25 +125,28 @@ void postOrderIterativeS1_Stacked2(BSTNode *root)
 {
 	if (root == NULL) return;
 
-	Stack *stack;
 	BSTNode *p = root;
+	Stack *stack;
 	stack->top = NULL;
 
-	push(stack, root);
-
-	while (!isEmpty(stack))
+	int flag = 0;
+	
+	while (!flag)
 	{
-		BSTNode *cur = peek(stack);
-		
-		// 둘다 NULL 일때
-		if (cur->left == NULL && cur->right == NULL)
-			pop(stack);
-
-		
-
-		// 둘다 NOT NULL
-		push(stack, root->left);
-		push(stack, root->right);
+		if (p != NULL) {
+			push(stack, p);
+			p = p->left;
+		}
+		else {
+			if (!isEmpty(stack)) {
+				printf("%d ", peek(stack)->item);
+				p = pop(stack);
+				p = p->right;
+			}
+			else {
+				flag = 1;
+			}
+		}
 	}
 }
 

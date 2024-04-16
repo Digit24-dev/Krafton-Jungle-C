@@ -31,7 +31,7 @@ typedef struct _stack
 
 // You should not change the prototypes of these functions
 void preOrderIterative(BSTNode *root);
-
+void preOrderIterative_usingStack(BSTNode *root);
 void insertBSTNode(BSTNode **node, int value);
 
 // You may use the following functions or you may write your own
@@ -97,6 +97,35 @@ void preOrderIterative(BSTNode *root)
 	printf("%d ", root->item);
 	preOrderIterative(root->left);
 	preOrderIterative(root->right);
+}
+
+void preOrderIterative_usingStack(BSTNode *root)
+{
+	BSTNode *p = root;
+	Stack *stack;
+	stack->top = NULL;
+	
+	int flag = 0;
+
+	while (!flag)
+	{
+		//if pointer is not null, there is a node.
+		if (p != NULL) {
+			push(stack, p);
+			printf("%d ", p->item);
+			p = p->left;
+		} 
+		else {		// if pointer is null, it means that the end of a node.
+			if (!isEmpty(stack)) {	// if stack is not empty.
+				p = pop(stack);
+				p = p->right;
+			}
+			else {
+				// if stack is empty => exit
+				flag = 1;
+			}
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

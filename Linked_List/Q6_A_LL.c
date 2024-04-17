@@ -102,7 +102,7 @@ int moveMaxToFront(ListNode **ptrHead)
 		}
 		curPrev = curPrev->next;
 	}
-	
+
 	// maxNode found
 	if (maxPrev != NULL) {
 		ListNode *temp = maxPrev->next;

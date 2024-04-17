@@ -181,6 +181,7 @@ BSTNode* removeNodeFromTree(BSTNode *root, int value)
 	if (root->item == value) {
 		// if root has left node
 		BSTNode *p = root;
+		
 		if (root->left != NULL) {
 			p = root->left;
 			// find highest node

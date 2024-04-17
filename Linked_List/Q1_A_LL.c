@@ -163,7 +163,7 @@ int insertSortedLL(LinkedList *ll, int item)
 			temp = temp->next;
 		}
 		if (idx == 0) {
-			newNode->next = ll->head->next;
+			newNode->next = ll->head;
 			ll->head = newNode;
 			ll->size++;
 			return 0;

@@ -175,13 +175,13 @@ void postOrderIterativeS2(BSTNode *root)
 BSTNode* removeNodeFromTree(BSTNode *root, int value)
 {
 	/* add your code here */
-	// pre first
+	// 
+	// predecessor first
 	if (root == NULL) return NULL;
 
 	if (root->item == value) {
-		// if root has left node
 		BSTNode *p = root;
-		
+		// if root has left node
 		if (root->left != NULL) {
 			p = root->left;
 			// find highest node
@@ -207,7 +207,7 @@ BSTNode* removeNodeFromTree(BSTNode *root, int value)
 		free(p);
 		return NULL;
 	}
-	
+
 	root->left  = removeNodeFromTree(root->left,  value);
 	root->right = removeNodeFromTree(root->right, value);
 
